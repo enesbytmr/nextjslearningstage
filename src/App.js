@@ -13,9 +13,8 @@ function App() {
   ]
   const [age, setAge] = useState(50)
   const increaseAge = () => {
-    setInterval(() => {
-      setAge(age-1)
-  console.log(age-1)    }, 300);
+ 
+      setAge(age+1)
 
   }
 
