@@ -1,43 +1,42 @@
+import { useState } from 'react';
 import './App.css';
-import { Planet } from './Planet';
-import { useState } from "react"
-import { Counter } from './Counter'
-function App() {
-  const planets =[
-    {name: "Mars", isGasPlanet: false},
-    {name: "Earth", isGasPlanet: false},
-    {name: "Jupiter", isGasPlanet: true},
-    {name: "Venus", isGasPlanet: false},
-    {name: "Neptune", isGasPlanet: true},
-    {name: "Uranus", isGasPlanet: true},
-  ]
-  const [age, setAge] = useState(50)
-  const increaseAge = () => {
- 
-      setAge(age+1)
+import { Task } from './Task';
 
-  }
+const App = () => {
+    const [todoList, setTodoList] = useState([])
+    const [newTask, setNewTask] = useState("")
 
-  return (
-     <div className='App'>
-      <h1 className='red'>Gas Planets</h1>
-
-      {planets.map((planet, key)=>{
-        return <Planet name={planet.name} isGasPlanet={planet.isGasPlanet}/>
-      })}
-    <hr />
-      <h1>{age}</h1>
-      <button onClick={increaseAge}>Hello</button>
-      <hr />
-      <Counter/>
-      <hr />
-
-     </div>
-
-     
-
-  );
-}
+    const handleChange = (event) => {
+    setNewTask(event.target.value)
+    }
+    const addTask = () => {
+        const task = {
+            id: todoList.length === 0 ? 1 : todoList[todoList.length -1].id + 1,
+            taskName: newTask,
+        }
+    setTodoList([...todoList, task])
+    }
+    const deleteTask = (id) => {
+        setTodoList(todoList.filter((task)=> task.id !== id))
+    }
 
 
+
+    return (
+        <div className='App'>
+            <div className='addTast'>
+                <input onChange={handleChange}/>
+                <button onClick={addTask}>Add Task</button>
+            </div>
+            <div className='list'>
+                {todoList.map(
+                    (task) => {
+                  return(  <Task taskName={task.taskName} id={task.id} deleteTask={deleteTask}/>)
+                })}
+            </div>
+
+        </div>
+
+    )
+};
 export default App;
