@@ -1,7 +1,7 @@
 import './App.css';
-import { Planet } from './Planet';
+import { Planet } from './pages/Planet';
 import { useState } from "react"
-import { Counter } from './Counter'
+import { Counter } from './pages/Counter'
 function App() {
   const planets =[
     {name: "Mars", isGasPlanet: false},
